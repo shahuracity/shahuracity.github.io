@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ሻሁራ ከተማ | Shahura City News</title>
+<meta name="description" content="የሻሁራ ከተማ ዜና፣ ማስታወቂያ እና የከተማዋ መረጃ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600;700;800&family=Noto+Serif+Ethiopic:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0d1326; --surface:#151e38; --surface2:#202b49;
+  --gold:#d4a24c; --gold2:#f0cf88; --teal:#4a8c7f;
+  --text:#f7f1e4; --muted:#aeb5c9; --red:#d94b4b;
+  --max:1180px; --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Noto Sans Ethiopic",sans-serif;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{width:min(var(--max),calc(100% - 32px));margin:auto}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(13,19,38,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(212,162,76,.2)}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Noto Serif Ethiopic",serif;font-weight:800;color:var(--gold2)}
+.logo{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{padding:9px 14px;border-radius:999px;color:var(--text);font-size:.92rem}
+.nav-links a:hover{background:var(--surface2);color:var(--gold2)}
+.actions{display:flex;align-items:center;gap:8px}
+button,.search-btn{font:inherit;cursor:pointer}
+.lang,.search-btn,.menu-btn{border:1px solid rgba(212,162,76,.35);background:var(--surface2);color:var(--text);border-radius:999px;padding:8px 13px}
+.menu-btn{display:none;border-radius:10px;width:42px;height:42px;padding:0}
+.mobile-nav{display:none;padding-bottom:14px}
+.mobile-nav a{display:block;background:var(--surface2);padding:10px 14px;margin-top:6px;border-radius:10px}
+
+/* Language */
+.en{display:none}
+body.lang-en .am{display:none}
+body.lang-en .en{display:inline}
+body.lang-en .am-block{display:none}
+body.lang-en .en-block{display:block}
+.en-block{display:none}
+
+/* Breaking */
+.breaking{background:#111a31;border-bottom:1px solid rgba(217,75,75,.3)}
+.breaking-inner{display:flex;align-items:center;gap:12px;min-height:42px}
+.breaking-label{background:var(--red);padding:4px 10px;border-radius:6px;font-weight:800;font-size:.8rem;white-space:nowrap}
+.breaking-text{color:#e9edf7;font-size:.9rem;overflow:hidden;white-space:nowrap}
+
+/* Hero */
+.hero{padding:54px 0 34px}
+.hero-grid{display:grid;grid-template-columns:1.5fr .8fr;gap:28px;align-items:stretch}
+.hero-copy{padding:18px 0}
+.kicker{color:var(--gold);font-weight:700;font-size:.9rem;margin-bottom:10px}
+.hero h1{font-family:"Noto Serif Ethiopic",serif;font-size:clamp(2.1rem,5vw,4.3rem);line-height:1.2;margin-bottom:16px}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:650px}
+.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.primary,.secondary{padding:12px 20px;border-radius:999px;font-weight:700}
+.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#171004}
+.secondary{border:1px solid rgba(212,162,76,.35);background:var(--surface);color:var(--text)}
+.hero-art{min-height:310px;border-radius:var(--radius);background:linear-gradient(145deg,var(--surface2),var(--surface));border:1px solid rgba(212,162,76,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.hero-art:before{content:"";width:210px;height:300px;border-radius:8px 8px 30px 30px;background:linear-gradient(90deg,rgba(212,162,76,.15),rgba(74,140,127,.25));transform:rotate(10deg);position:absolute}
+.stelae{font-size:7rem;color:var(--gold);opacity:.8;z-index:1}
+
+/* Sections */
+.section{padding:30px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:18px}
+.section-head h2{font-family:"Noto Serif Ethiopic",serif;color:var(--gold2);font-size:1.45rem}
+.section-head a{color:var(--teal);font-size:.9rem}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid rgba(212,162,76,.13);border-radius:var(--radius);overflow:hidden;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:rgba(212,162,76,.45)}
+.card-image{height:190px;background:linear-gradient(135deg,var(--surface2),#29365a);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2.6rem}
+.card-body{padding:18px}
+.date{color:var(--teal);font-size:.78rem;font-weight:700;margin-bottom:6px}
+.card h3{font-family:"Noto Serif Ethiopic",serif;font-size:1.05rem;line-height:1.5;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.87rem}
+
+/* Featured */
+.featured{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
+.feature-card{background:var(--surface);border:1px solid rgba(212,162,76,.16);border-radius:var(--radius);overflow:hidden}
+.feature-image{min-height:330px;background:linear-gradient(135deg,#26365b,#16223e);display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--gold)}
+.feature-body{padding:22px}
+.feature-body h3{font-family:"Noto Serif Ethiopic",serif;font-size:1.55rem;line-height:1.45;margin:8px 0}
+.latest{display:flex;flex-direction:column;gap:12px}
+.latest-item{background:var(--surface2);border-radius:12px;padding:15px;border-left:3px solid var(--gold)}
+.latest-item h4{font-size:.94rem;line-height:1.5}
+.latest-item small{color:var(--teal)}
+
+/* Categories */
+.categories{display:flex;gap:9px;flex-wrap:wrap}
+.category{padding:10px 16px;background:var(--surface);border:1px solid rgba(212,162,76,.18);border-radius:999px;color:var(--text)}
+.category:hover{background:var(--surface2);color:var(--gold2)}
+
+/* About/footer */
+.about{background:var(--surface);border:1px solid rgba(212,162,76,.15);border-radius:var(--radius);padding:28px}
+.about h2{font-family:"Noto Serif Ethiopic",serif;color:var(--gold2);margin-bottom:10px}
+.about p{color:var(--muted)}
+footer{margin-top:30px;border-top:1px solid rgba(212,162,76,.15);padding:35px 0;color:var(--muted);text-align:center}
+.footer-brand{color:var(--gold2);font-family:"Noto Serif Ethiopic",serif;font-weight:800;margin-bottom:8px}
+.socials{display:flex;justify-content:center;gap:10px;margin:14px 0}
+.socials a{padding:8px 13px;background:var(--surface2);border-radius:999px;color:var(--text)}
+
+@media(max-width:800px){
+  .nav-links{display:none}.menu-btn{display:block}.mobile-nav.open{display:block}
+  .hero-grid,.featured{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .container{width:min(var(--max),calc(100% - 22px))}
+  .nav{min-height:62px}.brand span{display:none}.logo{width:42px;height:42px}
+  .hero{padding:35px 0 20px}.hero h1{font-size:2rem}
+  .news-grid{grid-template-columns:1fr}
+  .feature-image{min-height:220px}
+  .section{padding:22px 0}
+  .search-btn{display:none}
+}
+</style>
+</head>
+
+<body class="lang-am">
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <img class="logo" src="assets/logo.jpg" alt="Shahura City logo">
+      <span><span class="am">ሻሁራ ከተማ</span><span class="en">Shahura City</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home"><span class="am">ቤት</span><span class="en">Home</span></a>
+      <a href="#news"><span class="am">ዜና</span><span class="en">News</span></a>
+      <a href="#categories"><span class="am">ምድቦች</span><span class="en">Categories</span></a>
+      <a href="#about"><span class="am">ስለ እኛ</span><span class="en">About</span></a>
+    </nav>
+
+    <div class="actions">
+      <button class="search-btn" onclick="focusSearch()" aria-label="Search">🔎</button>
+      <button class="lang" id="langToggle">English</button>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false">☰</button>
+    </div>
+  </div>
+
+  <nav class="container mobile-nav" id="mobileNav">
+    <a href="#home">🏠 <span class="am">ቤት</span><span class="en">Home</span></a>
+    <a href="#news">📰 <span class="am">ዜና</span><span class="en">News</span></a>
+    <a href="#categories">🗂️ <span class="am">ምድቦች</span><span class="en">Categories</span></a>
+    <a href="#about">🏛️ <span class="am">ስለ እኛ</span><span class="en">About</span></a>
+  </nav>
+</header>
+
+<div class="breaking">
+  <div class="container breaking-inner">
+    <span class="breaking-label"><span class="am">ሰበር ዜና</span><span class="en">BREAKING</span></span>
+    <div class="breaking-text">
+      <span class="am">የሻሁራ ከተማ አስተዳደር ወቅታዊ መረጃና ማስታወቂያዎች</span>
+      <span class="en">Latest official information and announcements from Shahura City Administration.</span>
+    </div>
+  </div>
+</div>
+
+<main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="kicker">SHAHURA CITY • OFFICIAL NEWS</div>
+        <h1>
+          <span class="am">የሻሁራ ከተማ ዜናና መረጃ</span>
+          <span class="en">Shahura City News & Information</span>
+        </h1>
+        <p>
+          <span class="am">የከተማችንን ወቅታዊ ዜና፣ ማስታወቂያ፣ ልማትና አገልግሎት መረጃ በአንድ ቦታ ያግኙ።</span>
+          <span class="en">Stay informed with official news, announcements, development updates and public information from Shahura City.</span>
+        </p>
+        <div class="hero-buttons">
+          <a class="primary" href="#news"><span class="am">የቅርብ ጊዜ ዜና</span><span class="en">Latest News</span> →</a>
+          <a class="secondary" href="#about"><span class="am">ስለ እኛ</span><span class="en">About Us</span></a>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Shahura City visual">
+        <div class="stelae">◆</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-head">
+        <h2><span class="am">⭐ ዋና ዜና</span><span class="en">⭐ Featured News</span></h2>
+        <a href="#latest"><span class="am">ሁሉንም ይመልከቱ</span><span class="en">View all</span> →</a>
+      </div>
+
+      <div class="featured">
+        <article class="feature-card">
+          <div class="feature-image">📰</div>
+          <div class="feature-body">
+            <div class="date">10 AUG 2026</div>
+            <h3>
+              <span class="am">የሻሁራ ከተማ ወቅታዊ ዜና እና ማስታወቂያ</span>
+              <span class="en">Shahura City latest news and official announcement</span>
+            </h3>
+            <p>
+              <span class="am">እዚህ ቦታ ላይ ዋናውን የዜና ጽሑፍ እና ምስል ማስገባት ይችላሉ።</span>
+              <span class="en">Your main news story and image can be placed here.</span>
+            </p>
+          </div>
+        </article>
+
+        <div class="latest">
+          <article class="latest-item">
+            <small>10 AUG 2026</small>
+            <h4><span class="am">የከተማው አዲስ ማስታወቂያ</span><span class="en">New city announcement</span></h4>
+          </article>
+          <article class="latest-item">
+            <small>09 AUG 2026</small>
+            <h4><span class="am">የልማት ሥራዎች ወቅታዊ መረጃ</span><span class="en">Development project update</span></h4>
+          </article>
+          <article class="latest-item">
+            <small>08 AUG 2026</small>
+            <h4><span class="am">ለነዋሪዎች የተላለፈ አስፈላጊ መረጃ</span><span class="en">Important information for residents</span></h4>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="latest">
+    <div class="container">
+      <div class="section-head">
+        <h2><span class="am">📰 የቅርብ ጊዜ ዜናዎች</span><span class="en">📰 Latest News</span></h2>
+      </div>
+      <div class="news-grid">
+        <article class="card"><div class="card-image">🏛️</div><div class="card-body"><div class="date">09 AUG 2026</div><h3><span class="am">የሻሁራ ከተማ አስተዳደር ወቅታዊ መረጃ</span><span class="en">Shahura City Administration update</span></h3><p><span class="am">ዝርዝር ዜናው እዚህ ይገኛል።</span><span class="en">Read the full story here.</span></p></div></article>
+        <article class="card"><div class="card-image">🏗️</div><div class="card-body"><div class="date">08 AUG 2026</div><h3><span class="am">የከተማ ልማት ሥራዎች</span><span class="en">City development activities</span></h3><p><span class="am">የልማት ሥራዎችን ይከታተሉ።</span><span class="en">Follow the latest development activities.</span></p></div></article>
+        <article class="card"><div class="card-image">📢</div><div class="card-body"><div class="date">07 AUG 2026</div><h3><span class="am">አስፈላጊ ማስታወቂያ</span><span class="en">Important public announcement</span></h3><p><span class="am">ለነዋሪዎች የተላለፈ መረጃ።</span><span class="en">Information for city residents.</span></p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-head"><h2><span class="am">🗂️ የዜና ምድቦች</span><span class="en">🗂️ News Categories</span></h2></div>
+      <div class="categories">
+        <a class="category" href="#news">🏛️ <span class="am">ሻሁራ</span><span class="en">Shahura</span></a>
+        <a class="category" href="#news">🇪🇹 <span class="am">ኢትዮጵያ</span><span class="en">Ethiopia</span></a>
+        <a class="category" href="#news">🏗️ <span class="am">ልማት</span><span class="en">Development</span></a>
+        <a class="category" href="#news">👥 <span class="am">ማህበራዊ</span><span class="en">Social</span></a>
+        <a class="category" href="#news">⚽ <span class="am">ስፖርት</span><span class="en">Sports</span></a>
+        <a class="category" href="#news">💻 <span class="am">ቴክኖሎጂ</span><span class="en">Technology</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about">
+        <h2><span class="am">🏛️ ስለ ሻሁራ ከተማ ኮሙዩኒኬሽን</span><span class="en">🏛️ About Shahura City Communication</span></h2>
+        <p>
+          <span class="am">ይህ ድረ-ገጽ የሻሁራ ከተማ አስተዳደር ዜናዎችን፣ ማስታወቂያዎችን እና ወቅታዊ መረጃዎችን ለህብረተሰቡ ለማድረስ የተዘጋጀ ነው።</span>
+          <span class="en">This website provides residents and visitors with Shahura City Administration news, announcements and public information.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-brand">ሻሁራ ከተማ • Shahura City</div>
+    <div><span class="am">የከተማችንን ዜና እና መረጃ በቀላሉ ይከታተሉ።</span><span class="en">Stay connected with official Shahura City news and information.</span></div>
+    <div class="socials">
+      <a href="#" aria-label="Facebook">Facebook</a>
+      <a href="#" aria-label="Telegram">Telegram</a>
+    </div>
+    <small>© <span id="year"></span> Shahura City Administration</small>
+  </div>
+</footer>
+
+<script>
+const body=document.body;
+document.getElementById("langToggle").addEventListener("click",()=>{
+  body.classList.toggle("lang-en");
+  document.getElementById("langToggle").textContent =
+    body.classList.contains("lang-en") ? "አማርኛ" : "English";
+});
+const menu=document.getElementById("mobileNav");
+const btn=document.getElementById("menuBtn");
+btn.addEventListener("click",()=>{
+  menu.classList.toggle("open");
+  btn.setAttribute("aria-expanded",menu.classList.contains("open"));
+});
+document.querySelectorAll(".mobile-nav a").forEach(a=>a.addEventListener("click",()=>menu.classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();
+function focusSearch(){
+  alert(body.classList.contains("lang-en") ? "Search will be connected to your news database." : "የፍለጋ ባህሪ በቀጣይ ይገናኛል።");
+}
+</script>
+</body>
+</html>
